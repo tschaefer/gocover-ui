@@ -1,5 +1,13 @@
 # gocover-ui
 
+[![tag](https://img.shields.io/github/tag/tschaefer/gocover-ui.svg)](https://github.com/tschaefer/gocover-ui/releases)
+![Build Status](https://github.com/tschaefer/gocover-ui/actions/workflows/ci.yml/badge.svg)
+[![Go report](https://goreportcard.com/badge/github.com/tschaefer/gocover-ui)](https://goreportcard.com/report/github.com/tschaefer/gocover-ui)
+[![Coverage](https://img.shields.io/codecov/c/github/tschaefer/gocover-ui)](https://codecov.io/gh/tschaefer/gocover-ui)
+[![Contributors](https://img.shields.io/github/contributors/tschaefer/gocover-ui)](https://github.com/tschaefer/gocover-ui/graphs/contributors)
+[![License](https://img.shields.io/github/license/tschaefer/gocover-ui)](./LICENSE)
+
+
 Generate a modern, interactive HTML coverage report from a Go coverage
 profile file.
 
