@@ -1,0 +1,7 @@
+# any coverage output
+/coverage/
+/coverage.out
+/coverage.html
+
+# release builds
+dist/

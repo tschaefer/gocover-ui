@@ -1,0 +1,136 @@
+.content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.editor {
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    overflow-x: auto;
+    min-width: 0;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+.code {
+    display: grid;
+    grid-template-columns: minmax(60px, auto) 1fr;
+    align-items: start;
+    min-width: 0;
+}
+
+.linenum {
+    padding: 6px 10px;
+    color: var(--text-muted);
+    text-align: right;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    line-height: 1.5;
+}
+
+.linenum .marker {
+    width: 1.5em;
+    text-align: right;
+    margin-right: 0.25em;
+    flex-shrink: 0;
+}
+
+.linenum .num {
+    text-align: right;
+    min-width: 2em;
+}
+
+.linenum.covered {
+    background: var(--bg-covered);
+    color: var(--text-covered);
+}
+
+.linenum.partial {
+    background: var(--bg-partial);
+    color: var(--text-partial);
+}
+
+.linenum.missed {
+    background: var(--bg-missed);
+    color: var(--text-missed);
+}
+
+.linenum.not-tracked {
+    background: var(--bg-not-tracked);
+    color: var(--text-not-tracked);
+}
+
+.linenum.highlighted.covered {
+    background: var(--bg-covered-highlighted);
+}
+
+.linenum.highlighted.partial {
+    background: var(--bg-partial-highlighted);
+}
+
+.linenum.highlighted.missed {
+    background: var(--bg-missed-highlighted);
+}
+
+.linenum.highlighted.not-tracked {
+    background: var(--bg-not-tracked-highlighted);
+}
+
+.line {
+    white-space: pre;
+    padding: 6px 12px;
+    display: block;
+    line-height: 1.5;
+}
+
+.line.covered {
+    background: var(--bg-covered);
+}
+
+.line.partial {
+    background: var(--bg-partial);
+}
+
+.line.missed {
+    background: var(--bg-missed);
+}
+
+.line.not-tracked {
+    color: var(--text-muted);
+}
+
+.line.highlighted.covered {
+    background: var(--bg-covered-highlighted);
+}
+
+.line.highlighted.partial {
+    background: var(--bg-partial-highlighted);
+}
+
+.line.highlighted.missed {
+    background: var(--bg-missed-highlighted);
+}
+
+.line.highlighted.not-tracked {
+    background: var(--bg-not-tracked-highlighted);
+}
+
+.nav {
+    margin-left: auto;
+}
+
+.navlink {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.navlink:hover {
+    color: var(--text-primary);
+}

@@ -1,0 +1,88 @@
+:root{
+  /* Base colors */
+  --bg-primary: rgba(7, 16, 29, 1);
+  --text-primary: rgba(255, 255, 255, 1);
+  --text-secondary: rgba(230, 245, 255, 1);
+  --text-muted: rgba(151, 160, 170, 1);
+  --text-accent: rgba(78, 161, 255, 1);
+  --font-mono: monospace;
+  --shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+
+  /* Coverags status colors */
+  --color-covered: 34, 197, 94;
+  --color-partial: 245, 158, 11;
+  --color-missed: 239, 68, 68;
+  --color-not-tracked: 151, 160, 170;
+
+  /* Coverage backgrounds (normal state) */
+  --bg-covered: rgba(var(--color-covered), 0.15);
+  --bg-partial: rgba(var(--color-partial), 0.15);
+  --bg-missed: rgba(var(--color-missed), 0.15);
+  --bg-not-tracked: transparent;
+
+  /* Coverage backgrounds (highlighted state) */
+  --bg-covered-highlighted: rgba(var(--color-covered), 0.35);
+  --bg-partial-highlighted: rgba(var(--color-partial), 0.35);
+  --bg-missed-highlighted: rgba(var(--color-missed), 0.35);
+  --bg-not-tracked-highlighted: rgba(var(--color-not-tracked), 0.15);
+
+  /* Coverage text colors */
+  --text-covered: rgba(var(--color-covered), 0.9);
+  --text-partial: rgba(var(--color-partial), 0.9);
+  --text-missed: rgba(var(--color-missed), 0.9);
+  --text-not-tracked: var(--text-muted);
+
+  /* UI element colors */
+  --bg-panel: rgba(255, 255, 255, 0.03);
+  --bg-hover: rgba(255, 255, 255, 0.05);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 40px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
+    }
+}
+
+.header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 20px 5px;
+}
+
+.h1 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.h2 {
+    font-size: 18px;
+    color: var(--text-muted);
+}
+
+.panel {
+    background: var(--bg-panel);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}

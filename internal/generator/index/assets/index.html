@@ -1,0 +1,23 @@
+{{define "title"}}{{.Module}}{{end}}
+
+{{define "subheader"}}{{.Module}}{{end}}
+
+{{define "content"}}
+  <div class="panel">
+    <div class="donut">
+      <svg id="donut" width="320" height="320" viewBox="-160 -160 320 320"></svg>
+    </div>
+  </div>
+  <div class="panel">
+    <div id="file-browser"></div>
+  </div>
+{{end}}
+
+{{define "scripts"}}
+<script>
+// Embedded metadata
+const files = {{.MetaJSON}};
+const fileTree = {{.TreeJSON}};
+</script>
+<script src="script.js"></script>
+{{end}}

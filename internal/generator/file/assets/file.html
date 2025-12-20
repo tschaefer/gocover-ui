@@ -1,0 +1,38 @@
+{{define "title"}}{{.File.LocalPath}}{{end}}
+
+{{define "cssPath"}}{{cssPath}}{{end}}
+
+{{define "subheader"}}{{.File.LocalPath}}{{end}}
+
+{{define "navlink"}}
+<span class="nav"><a href="{{indexPath}}" class="navlink">← back to index</a></span>
+{{end}}
+
+{{define "content"}}
+  <div class="panel">
+    <div class="editor">
+      <div class="code">
+        <div class="code-linenums">
+          {{range $i, $ln := .Lines}}
+            {{ $idx := inc $i }}
+            {{ $cls := lineClass $idx $.File.PerLineStatus }}
+            {{ $marker := lineMarker $idx $.File.PerLineStatus }}
+            <div class="linenum {{$cls}}" id="linenum-{{$idx}}" data-line="{{$idx}}" onclick="toggleHighlight({{$idx}})">
+              <span class="marker">{{$marker}}</span>
+              <span class="num">{{$idx}}</span>
+            </div>
+          {{end}}
+        </div>
+        <div class="code-lines">
+          {{range $i, $line := .Lines}}
+            {{ $idx := inc $i }}
+            {{ $cls := lineClass $idx $.File.PerLineStatus }}
+            <div class="line {{$cls}}" id="line-{{$idx}}">{{escape $line}}</div>
+          {{end}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{end}}
+
+{{define "scripts"}}<script src="{{scriptPath}}"></script>{{end}}

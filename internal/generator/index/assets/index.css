@@ -1,0 +1,95 @@
+.content {
+    display: grid;
+    grid-template-columns: 0.4fr 1.0fr;
+    gap: 20px;
+}
+
+.donut {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.file-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.file-table thead th {
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 8px 12px;
+    text-align: right;
+}
+
+.file-table tbody td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.file-table tbody td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.file-table-row {
+    transition: background 0.15s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .file-table-row:hover {
+        background: var(--bg-hover);
+    }
+}
+
+.file-table-row td {
+    padding: 8px 12px;
+}
+
+.file-table-name {
+    text-align: left;
+}
+
+.tree-name {
+    font-weight: 500;
+}
+
+.tree-name.dir {
+    color: var(--text-accent);
+}
+
+.file-table-stat {
+    text-align: right;
+    min-width: 32px;
+}
+
+.file-table-coverage {
+    text-align: right;
+    min-width: 60px;
+}
+
+.breadcrumb {
+    margin-bottom: 12px;
+    padding: 12px 12px;
+    border-radius: 8px;
+    background-color: var(--bg-hover);
+}
+
+.breadcrumb-item {
+    color: var(--text-accent);
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .breadcrumb-item:hover {
+        opacity: 0.7;
+    }
+}
+
+.breadcrumb-sep {
+    color: var(--text-muted);
+    margin: 0 6px;
+}
+
