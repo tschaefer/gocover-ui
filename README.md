@@ -45,7 +45,7 @@ coverage profile file.
 
 ```bash
 go test -coverprofile=coverage.out ./...
-gocover-ui -profile.file=coverage.out -src.root=. -out.dir=coverage
+gocover-ui -profile coverage.out -src . -out coverage
 open coverage/index.html
 ```
 
