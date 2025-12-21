@@ -14,8 +14,8 @@ const state = {
 const DOMUtils = (() => {
   function getLineElements(lineNum) {
     return {
-      line: document.getElementById('line-' + lineNum),
-      linenum: document.getElementById('linenum-' + lineNum)
+      line: document.getElementById(`line-${lineNum}`),
+      linenum: document.getElementById(`linenum-${lineNum}`)
     };
   }
 
@@ -48,8 +48,8 @@ const URLManager = (() => {
       return null;
     }
 
-    const lineNum = parseInt(hash.substring(HIGHLIGHT_CONFIG.hashPrefix.length));
-    return (lineNum && !isNaN(lineNum)) ? lineNum : null;
+    const lineNum = parseInt(hash.substring(HIGHLIGHT_CONFIG.hashPrefix.length), 10);
+    return (lineNum && !Number.isNaN(lineNum)) ? lineNum : null;
   }
 
   return { setLineHash, clearHash, getLineNumberFromHash };

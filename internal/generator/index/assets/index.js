@@ -48,8 +48,8 @@ const Tooltip = (() => {
       create();
     }
     tooltipElement.textContent = text;
-    tooltipElement.style.left = (x + 12) + 'px';
-    tooltipElement.style.top = (y + 12) + 'px';
+    tooltipElement.style.left = `${x + 12}px`;
+    tooltipElement.style.top = `${y + 12}px`;
     tooltipElement.style.display = 'block';
   }
 
@@ -120,7 +120,7 @@ const Navigation = (() => {
 
   function navigateToFile(localPath) {
     const htmlPath = localPath.replace(/\.[^.]+$/, '.html');
-    window.location.href = 'tree/' + htmlPath;
+    window.location.href = `tree/${htmlPath}`;
   }
 
   return { navigateInto, navigateToPath, navigateToFile };
@@ -142,7 +142,7 @@ const DOMHelpers = (() => {
     element.addEventListener('mousemove', (e) => {
       Tooltip.show(e.clientX, e.clientY, label);
     });
-    element.addEventListener('click', (e) => {
+    element.addEventListener('click', (_e) => {
       Tooltip.hide();
     });
 
@@ -164,7 +164,7 @@ const DOMHelpers = (() => {
     item.dataset.index = index;
     item.style.cursor = 'pointer';
     item.addEventListener('click', () => {
-      Navigation.navigateToPath(parseInt(item.dataset.index));
+      Navigation.navigateToPath(parseInt(item.dataset.index, 10));
     });
     return item;
   }
@@ -223,7 +223,7 @@ const FileTreeRenderer = (() => {
     const headerRow = document.createElement('tr');
 
     const headers = ['', 'Lines', 'Covered', 'Partial', 'Missed', 'Coverage'];
-    headers.forEach((text, index) => {
+    headers.forEach((text, _index) => {
       const th = document.createElement('th');
       th.textContent = text;
       th.className = 'file-table-stat-header';
@@ -248,7 +248,7 @@ const FileTreeRenderer = (() => {
     const nameCell = document.createElement('td');
     nameCell.className = 'file-table-name';
     const nameSpan = document.createElement('span');
-    nameSpan.className = 'tree-name' + (child.isDir ? ' dir' : '');
+    nameSpan.className = `tree-name${child.isDir ? ' dir' : ''}`;
     nameSpan.textContent = child.name;
     nameCell.appendChild(nameSpan);
     row.appendChild(nameCell);
@@ -262,7 +262,7 @@ const FileTreeRenderer = (() => {
     const color = ColorUtils.getCoverageColr(pct);
     const coverageCell = document.createElement('td');
     coverageCell.className = 'file-table-coverage';
-    coverageCell.textContent = pct.toFixed(1) + '%';
+    coverageCell.textContent = `${pct.toFixed(1)}%`;
     coverageCell.style.color = color;
     DOMHelpers.addTooltip(coverageCell, 'Coverage');
     row.appendChild(coverageCell);
@@ -271,7 +271,7 @@ const FileTreeRenderer = (() => {
     row.addEventListener('click', () => {
       if (child.isDir) {
         Navigation.navigateInto(child);
-      } else if (child.file && child.file.localPath) {
+      } else if (child.file?.localPath) {
         Navigation.navigateToFile(child.file.localPath);
       }
     });
@@ -379,7 +379,7 @@ const DonutChart = (() => {
     path.addEventListener('click', () => {
       if (item.isDir) {
         Navigation.navigateInto(item);
-      } else if (item.file && item.file.localPath) {
+      } else if (item.file?.localPath) {
         Navigation.navigateToFile(item.file.localPath);
       }
     });
