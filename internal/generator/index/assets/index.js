@@ -142,6 +142,9 @@ const DOMHelpers = (() => {
     element.addEventListener('mousemove', (e) => {
       Tooltip.show(e.clientX, e.clientY, label);
     });
+    element.addEventListener('click', (e) => {
+      Tooltip.hide();
+    });
 
     return element;
   }
