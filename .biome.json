@@ -1,0 +1,5 @@
+{
+  "files": {
+    "includes": ["internal/generator/**/*.js", "internal/generator/**/*.css"]
+  }
+}

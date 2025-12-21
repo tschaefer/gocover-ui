@@ -7,7 +7,8 @@ fmt:
 
 .PHONY: lint
 lint:
-	test -z $(shell golangci-lint run >/dev/null || echo 1) || (echo "[WARN] Fix lint issues" && exit 1)
+	test -z $(shell golangci-lint run >/dev/null || echo 1) || (echo "[WARN] Fix golang lint issues" && exit 1)
+	test -z $(shell biome lint --config-path=.biome.json --javascript-linter-enabled=true >/dev/null || echo 1) || (echo "[WARN] Fix javascript lint issues" && exit 1)
 
 .PHONY: test
 test:
