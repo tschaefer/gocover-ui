@@ -50,6 +50,13 @@ type FileMetrics struct {
 	PerLineStatus []int   `json:"perLineStatus"`
 }
 
+type TotalMetrics struct {
+	TotalFiles   int     `json:"totalFiles"`
+	TotalStmts   int     `json:"totalStmts"`
+	CoveredStmts int     `json:"coveredStmts"`
+	CoveragePct  float64 `json:"coveragePct"`
+}
+
 // Analyze processes a coverage profile and returns file metrics
 func Analyze(p *cover.Profile, module, srcRoot string) (*FileMetrics, error) {
 	if !strings.HasPrefix(p.FileName, module) {
@@ -130,6 +137,29 @@ func Analyze(p *cover.Profile, module, srcRoot string) (*FileMetrics, error) {
 		TotalStmts:    totalStatements,
 		CoveredStmts:  coveredStatements,
 	}, nil
+}
+
+func Statistics(metrics []*FileMetrics) *TotalMetrics {
+	totalFiles := len(metrics)
+	totalStmts := 0
+	coveredStmts := 0
+
+	for _, m := range metrics {
+		totalStmts += m.TotalStmts
+		coveredStmts += m.CoveredStmts
+	}
+
+	coveragePct := 0.0
+	if totalStmts > 0 {
+		coveragePct = (float64(coveredStmts) / float64(totalStmts)) * 100.0
+	}
+
+	return &TotalMetrics{
+		TotalFiles:   totalFiles,
+		TotalStmts:   totalStmts,
+		CoveredStmts: coveredStmts,
+		CoveragePct:  round(coveragePct, 2),
+	}
 }
 
 // Round rounds a float64 to specified precision
