@@ -75,12 +75,11 @@ func Analyze(p *cover.Profile, module, srcRoot string) (*FileMetrics, error) {
 		lines = lines[:len(lines)-1]
 	}
 	lineCount := len(lines)
-	totalStmtsPerLine := make([]int, lineCount+1)
-	coveredStmtsPerLine := make([]int, lineCount+1)
 
 	totalStatements := 0
 	coveredStatements := 0
-
+	totalStmtsPerLine := make([]int, lineCount+1)
+	coveredStmtsPerLine := make([]int, lineCount+1)
 	for _, b := range p.Blocks {
 		for ln := b.StartLine; ln <= b.EndLine && ln <= lineCount; ln++ {
 			totalStmtsPerLine[ln] += b.NumStmt
@@ -99,7 +98,6 @@ func Analyze(p *cover.Profile, module, srcRoot string) (*FileMetrics, error) {
 	partialLines := 0
 	missedLines := 0
 	perLineStatus := make([]int, lineCount+1)
-
 	for ln := 1; ln <= lineCount; ln++ {
 		total := totalStmtsPerLine[ln]
 		if total == 0 {

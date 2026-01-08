@@ -78,4 +78,10 @@ func TestPrint(t *testing.T) {
 	if !strings.Contains(output, "Commit:  abc123def") {
 		t.Error("output should contain commit info")
 	}
+
+	_ = os.Setenv("NO_COLOR", "1")
+	outputNoColor := capture(Print)
+	if strings.Contains(outputNoColor, "\x1b[") {
+		t.Error("output should not contain color codes when NO_COLOR is set")
+	}
 }

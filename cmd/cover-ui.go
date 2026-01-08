@@ -35,13 +35,17 @@ func Run() {
 
 	printVersion()
 
-	removeOldFiles()
+	err := removeOldFiles()
+	checkErr(err)
 
 	module, err := module.Read(*srcRoot)
 	checkErr(err)
 
-	files := analyzeProfile(module)
-	generateHtmlFiles(files, module)
+	files, err := analyzeProfile(module)
+	checkErr(err)
+
+	err = generateHtmlFiles(files, module)
+	checkErr(err)
 }
 
 func printVersion() {
@@ -53,18 +57,19 @@ func printVersion() {
 	os.Exit(0)
 }
 
-func removeOldFiles() {
+func removeOldFiles() error {
 	if !*cleanOutDir {
-		return
+		return nil
 	}
 
-	err := os.RemoveAll(*outDir)
-	checkErr(err)
+	return os.RemoveAll(*outDir)
 }
 
-func analyzeProfile(module string) []*coverage.FileMetrics {
+func analyzeProfile(module string) ([]*coverage.FileMetrics, error) {
 	profiles, err := cover.ParseProfiles(*profileFile)
-	checkErr(err)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse coverage profile: %w", err)
+	}
 
 	var files []*coverage.FileMetrics
 	for _, profile := range profiles {
@@ -77,33 +82,39 @@ func analyzeProfile(module string) []*coverage.FileMetrics {
 	}
 
 	if len(files) == 0 {
-		checkErr(fmt.Errorf("no valid coverage profiles found in %s", *profileFile))
+		return nil, fmt.Errorf("no valid coverage profiles found in %s", *profileFile)
 	}
 
-	return files
+	return files, nil
 }
 
-func generateHtmlFiles(files []*coverage.FileMetrics, module string) {
+func generateHtmlFiles(files []*coverage.FileMetrics, module string) error {
 	filesDir := filepath.Join(*outDir, "tree")
 
-	err := file.Assets(filesDir)
-	checkErr(err)
+	if err := file.Assets(filesDir); err != nil {
+		return err
+	}
 
-	err = index.Assets(*outDir)
-	checkErr(err)
+	if err := index.Assets(*outDir); err != nil {
+		return err
+	}
 
-	err = index.Generate(files, *outDir, module)
-	checkErr(err)
+	if err := index.Generate(files, *outDir, module); err != nil {
+		return err
+	}
 
 	for _, f := range files {
-		err := file.Generate(f, filesDir)
-		checkErr(err)
+		if err := file.Generate(f, filesDir); err != nil {
+			return err
+		}
 
 		path := filepath.Join(filesDir, strings.TrimSuffix(f.LocalPath, ".go")+".html")
 		printProgress(fmt.Sprintf("Generated %s", path))
 	}
 
 	printStatistics(files)
+
+	return nil
 }
 
 func printProgress(message string) {
